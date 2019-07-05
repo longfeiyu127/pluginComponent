@@ -51,11 +51,13 @@ export function show (options) {
 }
 
 export function hide () {
-  router.go(-1)
   $vm.targetValue = false
   $vm.$nextTick(() => {
     $watcher && $watcher()
     $watcher = null
+    if (window.location.hash.indexOf('pluginHash') !== -1) {
+      router.go(-1)
+    }
   })
 }
 
